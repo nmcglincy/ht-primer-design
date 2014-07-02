@@ -17,3 +17,5 @@ foo = p3.output(seq = ydr114c.seqA, name = "ydr117c")
 f00 = .callP3NreadOrg(seq = ydr114c.seqA, name = "ydr117c")
 ls()
 f00
+
+.callP3NreadOrg(seq = ydr114c.seqA, name = "ydr117c")
