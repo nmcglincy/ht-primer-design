@@ -20,7 +20,7 @@
 #'                      ,SIMPLIFY = FALSE)
 #' 
 #' 
-.callP3NreadOrg<-function(seq,size_range='151-500',Tm=c(55,57,58),name = "Hodor",
+.callP3NreadOrg<-function(seq,size_range='151-500',Tm=c(58,60,62),name = "Hodor",
                           primer3="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_core",
                           thermo.param="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_config/",
                           settings="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_v1_1_4_default_settings.txt") {

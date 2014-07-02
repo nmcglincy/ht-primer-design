@@ -1,35 +1,20 @@
 # A script to pick potential primers from a multi-fasta file
 # 
-# First I need a sequence
-library("Biostrings")
-?readDNAStringSet
-ydr114c.seq = readDNAStringSet(filepath = "ydr117c.fasta")
-ydr114c.seq
-?DNAString
-ydr114c.seqA = DNAString(ydr114c.seq[[1]])
-ydr114c.seqA
-
-# # Load the function
-source("/Users/nmcglincy/Documents/computing/github/ingolia_lab/ht-primer-design/callPrimer3-NJM.R")
-ls()
-
-foo = .callP3NreadOrg(seq = ydr114c.seqA, 
-                      Tm = c(58, 60, 62),
-                      name = "ydr117c")
-foo
-
-# I wonder if biostrings has a lapply like function for DNAstrings sets?
-
-?DNAStringSet
-
-tmaSeqs = readDNAStringSet(filepath = "tma-orf-sequencesA copy.fasta")
-tmaSeqs
-class(as.list(tmaSeqs))
-str(as.list(tmaSeqs))
-# try this with taking out my gene name addition
-tma.primers = lapply(as.list(tmaSeqs), .callP3NreadOrg, Tm = c(58, 60, 62), name = "Tom")
-str(tma.primers)
-library(plyr)
-tma.primers.df = ldply(tma.primers)
-head(tma.primers.df)
-write.csv(tma.primers.df, file = "tma-orf-primes.csv")
+pick.primers = function(fastaFile) {
+  library("Biostrings")
+  dna.sequences = readDNAStringSet(filepath = fastaFile)
+  #   
+  # Load function calling Primer3
+  source("/Users/nmcglincy/Documents/computing/github/ingolia_lab/ht-primer-design/callPrimer3-NJM.R")
+  #
+  # Specify values of:
+  # @param size_range = '151-500'
+  # @param Tm = c(58, 60, 62)
+  l.primers = lapply(as.list(dna.sequences), .callP3NreadOrg)
+  #
+  # Converting into a data.frame I can write to a csv
+  library(plyr)
+  df.primers = ldply(l.primers)
+  write.csv(df.primers, file = "here-are-your-primers.csv")
+}
+  
