@@ -23,34 +23,28 @@
 .callP3NreadOrg<-function(seq,size_range='151-500',Tm=c(55,57,58),name,
                           primer3="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_core",
                           thermo.param="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_config/",
-                          settings="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_v1_1_4_default_settings.txt")
-  
+                          settings="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_v1_1_4_default_settings.txt") {
   #print(excluded.regions)
   # make primer 3 input file
   p3.input=tempfile()
   p3.output=tempfile()
-  write(
-    paste( sprintf("SEQUENCE_ID=%s\n",name  ),
-           sprintf("SEQUENCE_TEMPLATE=%s\n",as.character(seq),
-           "PRIMER_TASK=pick_detection_primers\n",
-           "PRIMER_PICK_LEFT_PRIMER=1\n" ,
-           "PRIMER_PICK_INTERNAL_OLIGO=0\n",
-           "PRIMER_PICK_RIGHT_PRIMER=1\n"  ,
-           "PRIMER_EXPLAIN_FLAG=1\n"  ,
-           "PRIMER_PAIR_MAX_DIFF_TM=3\n",
-           sprintf("PRIMER_MIN_TM=%s\n" ,Tm[1]),
-           sprintf("PRIMER_OPT_TM=%s\n" ,Tm[2]),
-           sprintf("PRIMER_MAX_TM=%s\n" ,Tm[3]),
-           sprintf("PRIMER_PRODUCT_SIZE_RANGE=%s\n" ,size_range),
-           sprintf("PRIMER_THERMODYNAMIC_PARAMETERS_PATH=%s\n" ,thermo.param),
-           "=",
-           sep=''
-    )
-    ,
-    p3.input
-  )
+  write(paste(sprintf("SEQUENCE_ID=%s\n",name),
+              sprintf("SEQUENCE_TEMPLATE=%s\n",as.character(seq)),
+              "PRIMER_TASK=pick_detection_primers\n",
+              "PRIMER_PICK_LEFT_PRIMER=1\n" ,
+              "PRIMER_PICK_INTERNAL_OLIGO=0\n",
+              "PRIMER_PICK_RIGHT_PRIMER=1\n",
+              "PRIMER_EXPLAIN_FLAG=1\n",
+              "PRIMER_PAIR_MAX_DIFF_TM=3\n",
+              sprintf("PRIMER_MIN_TM=%s\n" ,Tm[1]),
+              sprintf("PRIMER_OPT_TM=%s\n" ,Tm[2]),
+              sprintf("PRIMER_MAX_TM=%s\n" ,Tm[3]),
+              sprintf("PRIMER_PRODUCT_SIZE_RANGE=%s\n" ,size_range),
+              sprintf("PRIMER_THERMODYNAMIC_PARAMETERS_PATH=%s\n" ,thermo.param),
+              "=",
+              sep=''),
+        p3.input)
   #call primer 3 and store the output in a temporary file
-  
   try(system(
     paste(primer3 ,p3.input, "-p3_settings_file",settings, 
                 ">", p3.output)
