@@ -20,7 +20,7 @@
 #'                      ,SIMPLIFY = FALSE)
 #' 
 #' 
-.callP3NreadOrg<-function(seq,size_range='151-500',Tm=c(55,57,58),name,
+.callP3NreadOrg<-function(seq,size_range='151-500',Tm=c(55,57,58),name = "Hodor",
                           primer3="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_core",
                           thermo.param="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_config/",
                           settings="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_v1_1_4_default_settings.txt") {
@@ -97,10 +97,8 @@
       rownames(primer.info)=NULL
       designed.primers=rbind(designed.primers, primer.info)
       #print(primer.info)
+      
     }
-    
-    
-    
     #colnames(designed.primers)=c('PrimerID',
     #                             'Fwseq','Rvseq',
     #                             'FwTm','RvTm',
@@ -109,6 +107,11 @@
     #                             'fragLen' )
     
   }
+#   Optional addition of gene.id to the table in the single gene case...
+# 
+#   gene.id = rep(name, 5)
+#   designed.primers = data.frame(gene.id = gene.id,
+#                                 designed.primers)
   return(designed.primers)
 }
 

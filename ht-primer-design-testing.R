@@ -13,9 +13,11 @@ ydr114c.seqA
 source("/Users/nmcglincy/Documents/computing/github/ingolia_lab/ht-primer-design/callPrimer3-NJM.R")
 ls()
 
-foo = p3.output(seq = ydr114c.seqA, name = "ydr117c")
-f00 = .callP3NreadOrg(seq = ydr114c.seqA, name = "ydr117c")
-ls()
-f00
+foo = .callP3NreadOrg(seq = ydr114c.seqA, 
+                      Tm = c(58, 60, 62),
+                      name = "ydr117c")
+foo
 
-.callP3NreadOrg(seq = ydr114c.seqA, name = "ydr117c")
+# I wonder if biostrings has a lapply like function for DNAstrings sets?
+
+?DNAStringSet
