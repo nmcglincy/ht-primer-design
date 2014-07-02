@@ -1,4 +1,4 @@
-# Testing ht-primer design using callPrimer3 function
+# A script to pick potential primers from a multi-fasta file
 # 
 # First I need a sequence
 library("Biostrings")
