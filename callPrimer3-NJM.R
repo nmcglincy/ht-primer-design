@@ -116,51 +116,51 @@
 }
 
 
-#' convert primer list to genomic intervals
-#' 
-#' function returns a GRanges or data frame object from a list of primers designed
-#' by \code{designPrimers} function after calculating genomic location of the amplicon
-#' targeted by the primers.
-#' 
-#' @param primers a list of primers returned by \code{designPrimers} function
-#' @param as.data.frame logical indicating if a data frame should be returned
-#'        instead of \code{GRanges} object.
-#'        
-#' @examples
-#'  data(bisPrimers)
-#'  # remove data with no primers found
-#'  bisPrimers=bisPrimers[!is.na(bisPrimers)]
-#'  gr.pr=primers2ranges(bisPrimers) # convert primers to GRanges
-#'          
-#' @seealso \code{\link{filterPrimers}}, \code{\link{designPrimers}}
-#'        
-#' @export
-#' @docType methods
-primers2ranges<-function(primers,as.data.frame=FALSE){
-  
-  if(any(is.na(primers))){
-    warning( "There are targets without primers\nfiltering those before conversion")
-    primers=primers[ !is.na(primers) ]
-  }
-  df=do.call("rbind",primers) # get primers to a df
-  locs=gsub("\\|\\.+","",rownames(df)) # get the coordinates from list ids
-  temp=do.call("rbind",strsplit(locs,"_")) #
-  
-  start=as.numeric(temp[,2])
-  chr=as.character(temp[,1])
-  
-  
-  
-  amp.start= start + as.numeric(df$PRIMER_LEFT_pos)  
-  amp.end  = start + as.numeric(df$PRIMER_RIGHT_pos)
-  res=data.frame(chr=chr,start=amp.start,end=amp.end,df)
-  #saveRDS(res,file="/work2/gschub/altuna/projects/DMR_alignments/all.designed.primers.to.amps.rds")
-  if(as.data.frame)
-  {
-    return(res)
-  }
-  gr=GRanges(seqnames=res[,1],ranges=IRanges(res[,2],res[,3]) )
-  values(gr)=res[,-c(1,2,3)]
-  gr
-}
-
+# #' convert primer list to genomic intervals
+# #' 
+# #' function returns a GRanges or data frame object from a list of primers designed
+# #' by \code{designPrimers} function after calculating genomic location of the amplicon
+# #' targeted by the primers.
+# #' 
+# #' @param primers a list of primers returned by \code{designPrimers} function
+# #' @param as.data.frame logical indicating if a data frame should be returned
+# #'        instead of \code{GRanges} object.
+# #'        
+# #' @examples
+# #'  data(bisPrimers)
+# #'  # remove data with no primers found
+# #'  bisPrimers=bisPrimers[!is.na(bisPrimers)]
+# #'  gr.pr=primers2ranges(bisPrimers) # convert primers to GRanges
+# #'          
+# #' @seealso \code{\link{filterPrimers}}, \code{\link{designPrimers}}
+# #'        
+# #' @export
+# #' @docType methods
+# primers2ranges<-function(primers,as.data.frame=FALSE){
+#   
+#   if(any(is.na(primers))){
+#     warning( "There are targets without primers\nfiltering those before conversion")
+#     primers=primers[ !is.na(primers) ]
+#   }
+#   df=do.call("rbind",primers) # get primers to a df
+#   locs=gsub("\\|\\.+","",rownames(df)) # get the coordinates from list ids
+#   temp=do.call("rbind",strsplit(locs,"_")) #
+#   
+#   start=as.numeric(temp[,2])
+#   chr=as.character(temp[,1])
+#   
+#   
+#   
+#   amp.start= start + as.numeric(df$PRIMER_LEFT_pos)  
+#   amp.end  = start + as.numeric(df$PRIMER_RIGHT_pos)
+#   res=data.frame(chr=chr,start=amp.start,end=amp.end,df)
+#   #saveRDS(res,file="/work2/gschub/altuna/projects/DMR_alignments/all.designed.primers.to.amps.rds")
+#   if(as.data.frame)
+#   {
+#     return(res)
+#   }
+#   gr=GRanges(seqnames=res[,1],ranges=IRanges(res[,2],res[,3]) )
+#   values(gr)=res[,-c(1,2,3)]
+#   gr
+# }
+# 
