@@ -16,8 +16,9 @@ pick.primers = function(fastaFile) {
   library(plyr)
   df.primers = ldply(l.primers)
   write.csv(df.primers, 
-            file = "here-are-your-primers.csv", 
+            file = "primer-table.csv", 
             row.names = FALSE,
             eol = "\n")
+  system("awk -F, 'NR > 1 {print ">" $1 "_" $2 "_F\n" $3 "\n" ">" $1 "_" $2 "_R\n" $4}' primer-table.csv | tr -d "\"" > primers.fasta")
 }
   
