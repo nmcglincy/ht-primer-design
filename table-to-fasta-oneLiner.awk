@@ -1,2 +1,2 @@
 # How do I skip the first line?
-awk -F, '{print ">" $2 "_" $3 "_F\n" $4 "\n" ">" $2 "_" $3 "_R\n" $5}' tma-orf-primes.csv > foo
+awk -F, '{print ">" $1 "_" $2 "_F\n" $3 "\n" ">" $1 "_" $2 "_R\n" $4}' here-are-your-primers.csv > foo
