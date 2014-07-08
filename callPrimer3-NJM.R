@@ -20,6 +20,9 @@
 #'                      ,SIMPLIFY = FALSE)
 #' 
 #' 
+#' TODO - would be cool to be able to set the number of primers I wanted to design; probabaly in the Primer3 settings
+#' TODO - would be cool to be able to specify target regions
+#' 
 .callP3NreadOrg<-function(seq,size_range='151-500',Tm=c(58,60,62),name = "Hodor",
                           primer3="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_core",
                           thermo.param="/Users/nmcglincy/Documents/computing/primer3-2.3.6/primer3_config/",
