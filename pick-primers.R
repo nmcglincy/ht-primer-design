@@ -19,5 +19,7 @@ pick.primers = function(fastaFile) {
             file = "primer-table.csv", 
             row.names = FALSE,
             eol = "\n")
+  #
+  # Reformatting into a multi-fasta file that is easy to paste into BLAST etc
   system("awk -f table-to-fasta.awk primer-table.csv | tr -d '\"' > primers.fasta")
 }
