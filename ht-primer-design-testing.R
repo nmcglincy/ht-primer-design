@@ -39,6 +39,10 @@ write.csv(tma.primers.df, file = "tma-orf-primes.csv")
 ?write.csv
 
 source("pick-primers.R")
+pick.primers
 ls()
 list.files()
 pick.primers("tma-orf-sequencesA copy.fasta")
+?system
+??writelines
+rm(list = ls())

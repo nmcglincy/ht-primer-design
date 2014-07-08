@@ -19,6 +19,5 @@ pick.primers = function(fastaFile) {
             file = "primer-table.csv", 
             row.names = FALSE,
             eol = "\n")
-  system("awk -F, 'NR > 1 {print ">" $1 "_" $2 "_F\n" $3 "\n" ">" $1 "_" $2 "_R\n" $4}' primer-table.csv | tr -d "\"" > primers.fasta")
+  system("awk -f table-to-fasta.awk primer-table.csv | tr -d '\"' > primers.fasta")
 }
-  
