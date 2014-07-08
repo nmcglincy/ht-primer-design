@@ -15,6 +15,9 @@ pick.primers = function(fastaFile) {
   # Converting into a data.frame I can write to a csv
   library(plyr)
   df.primers = ldply(l.primers)
-  write.csv(df.primers, file = "here-are-your-primers.csv")
+  write.csv(df.primers, 
+            file = "here-are-your-primers.csv", 
+            row.names = FALSE,
+            eol = "\n")
 }
   

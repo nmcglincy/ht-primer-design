@@ -33,3 +33,10 @@ library(plyr)
 tma.primers.df = ldply(tma.primers)
 head(tma.primers.df)
 write.csv(tma.primers.df, file = "tma-orf-primes.csv")
+
+# Tweeking script to enable passing table to awk
+
+?write.csv
+
+source("pick-primers.R")
+pick.primers("tma-orf-sequencesA copy.fasta")
